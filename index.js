@@ -1,11 +1,25 @@
 var express = require('express');  
 var http = require('http');
-
-
-
 var app = express();  
+
+var argv = require('yargs')
+    .usage('$0 <cmd> [args]')
+    .option('host', {
+      alias: 'h',
+      describe: 'Hostname of external Server example.com',
+      demand: true,
+      demand: 'Hostname is required. See --help for usage'
+    })
+    .option('port',{
+      alias: 'p',
+      describe: 'Port to listen to',
+      default: 3320
+    })
+    .help('help')
+    .argv;
+
 app.use('/', function(req, res) {
-	var hostURL = "http://ngd8j7ag8i3kvv.devcloud.acquia-sites.com";
+	var hostURL = "http://" + argv.host;
 	var url = hostURL + req.url;
     //req.pipe(request(url)).pipe(res);
 	
@@ -49,4 +63,4 @@ app.use('/', function(req, res) {
 	
 });
 
-app.listen(process.env.PORT || 3320); 
+app.listen(process.env.PORT || argv.port); 
