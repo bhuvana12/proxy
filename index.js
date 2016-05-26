@@ -6,7 +6,7 @@ var argv = require('yargs')
     .usage('$0 <cmd> [args]')
     .option('host', {
       alias: 'h',
-      describe: 'Hostname of external Server example.com',
+      describe: 'Hostname of external server. Like example.com',
       demand: true,
       demand: 'Hostname is required. See --help for usage'
     })
